@@ -62,6 +62,11 @@
       const audio = [...document.querySelectorAll("audio")];
 
       console.log(keys);
+      const keysData = keys.map((key) => key.getAttribute("data-key"));
+      const audioData = audio.map((audio) => audio.getAttribute("data-key"));
+      console.log(keysData);
+      console.log(audioData);
+
       console.log(audio);
     </script>
   </body>
