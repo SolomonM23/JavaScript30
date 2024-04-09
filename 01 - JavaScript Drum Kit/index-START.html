@@ -57,11 +57,12 @@
     <audio data-key="108" src="sounds/tink.wav"></audio>
 
     <script>
+      //get the keycode from the keypress event
       function playSound(e) {
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); //audio nodelist selected by data-key attribute
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`); //keys nodelist selected by data-key attribute
         if (!audio) return; //stop the function if no audio matching keycode
-        audio.currentTime = 0; //restart the audio
+        audio.currentTime = 0; //restart the audio if key pressed while audio already playing
         audio.play();
         key.classList.add("playing");
       }
@@ -73,6 +74,7 @@
       }
 
       const keys = document.querySelectorAll(".key");
+      //loop through the nodelist adding the event to each item
       keys.forEach((key) =>
         key.addEventListener("transitionend", removeTransition)
       );
