@@ -110,6 +110,13 @@
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+      const container = document.querySelector(".mw-category");
+      const links = [...container.querySelectorAll("a")]; //convert nodelist to array
+
+      const de = links
+        .map((link) => link.textContent) //get the name of each link
+        .filter((link) => link.includes("de")); //return only names with 'de'
+
       // 7. sort Exercise
       // Sort the people alphabetically by last name
 
