@@ -120,7 +120,11 @@
       // 7. sort Exercise
       // Sort the people alphabetically by last name
 
-      const names = people.map((name) => name.split(",").join(""));
+      const names = people.sort((last, next) => {
+        const [aLast, aFirst] = last.split(","); //the brackets reorders the array item content to get the last word
+        const [bLast, bFirst] = next.split(",");
+        return aLast > bLast ? 1 : -1; //compares last names of items then sorts alphabetically
+      });
       console.log(names);
 
       // 8. Reduce Exercise
