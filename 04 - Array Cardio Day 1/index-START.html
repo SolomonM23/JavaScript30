@@ -145,6 +145,20 @@
         "car",
         "truck",
       ];
+
+      //start with an empty object
+      let instances = data.reduce((obj, curr) => {
+        //if there is no starting point for the element, make a zero entry to set it for the loop
+        if (!obj[curr]) {
+          obj[curr] = 0;
+        }
+        //increment for multiple instances
+        obj[curr]++;
+        //return object for each item with its instances
+        return obj;
+      }, {});
+
+      console.log(instances);
     </script>
   </body>
 </html>
