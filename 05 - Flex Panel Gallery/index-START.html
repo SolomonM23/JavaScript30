@@ -76,7 +76,6 @@
       .panel > * {
         margin: 0;
         width: 100%;
-        border: 1px solid red;
         flex: 1 0 auto;
         display: flex;
         justify-content: center;
@@ -150,8 +149,10 @@
         this.classList.toggle("open");
       }
 
+      //figure out which event was fired on the node
       function toggleActive(e) {
         console.log(e.propertyName);
+        //we target for the flex property transition
         if (e.propertyName.includes("flex")) {
           this.classList.toggle("open-active");
         }
