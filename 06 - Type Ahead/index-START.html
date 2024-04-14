@@ -26,6 +26,15 @@
         .then((data) => cities.push(...data)); //get the raw data of the fetch and put it into our cities variable using spread operator
 
       const cities = [];
+
+      //filter the cities array
+      function findMatches(wordToMatch, cities) {
+        return cities.filter((place) => {
+          //check if city or state matches user input
+          const regex = new RegExp(wordToMatch, "gi");
+          return place.city.match(regex) || place.state.match(regex);
+        });
+      }
     </script>
   </body>
 </html>
