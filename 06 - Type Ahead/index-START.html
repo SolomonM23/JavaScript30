@@ -27,7 +27,7 @@
 
       const cities = [];
 
-      //filter the cities array
+      //filter the cities array data
       function findMatches(wordToMatch, cities) {
         return cities.filter((place) => {
           //check if city or state matches user input
@@ -36,14 +36,27 @@
         });
       }
 
+      //show the cities array matches from user input in console.
       function displayMatches() {
         const matchArray = findMatches(this.value, cities);
+        const html = matchArray
+          .map((place) => {
+            return `
+          <li>
+            <span class="name">${place.city}, ${place.state}</span>
+            <span class="population">${place.population}</span> 
+          </li>
+          `;
+          })
+          .join("");
+        suggestions.innerHTML = html;
         console.log(matchArray);
       }
 
       const searchInput = document.querySelector(".search");
       const suggestions = document.querySelector(".suggestions");
 
+      //input changes
       searchInput.addEventListener("change", displayMatches);
       searchInput.addEventListener("keyup", displayMatches);
     </script>
