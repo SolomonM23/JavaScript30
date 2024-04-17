@@ -13,6 +13,32 @@
       //resize canvas to match the viewport size. default size already on the canvas tag
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+
+      //base brush stroke settings
+      ctx.strokeStyle = "#BADA55"; //color
+      ctx.lineJoin = "round"; //the line shape itself
+      ctx.lineCap = "round"; //the end point shape of the line
+
+      let isDrawing = false;
+      let lastX = 0;
+      let lastY = 0;
+
+      function draw(e) {
+        if (!isDrawing) return; //stops the function when no mouse down
+        console.log(e);
+        ctx.beginPath(); //start drawing
+        ctx.moveTo(lastX, lastY); //starting point
+        ctx.lineTo(e.offsetX, e.offsetY); //end point
+        ctx.stroke();
+
+        //update X and Y start point after running draw()
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      }
+
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("mousedown", () => (isDrawing = true));
+      canvas.addEventListener("mouseup", () => (isDrawing = false));
+      canvas.addEventListener("mouseout", () => (isDrawing = false));
     </script>
 
     <style>
