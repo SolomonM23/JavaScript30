@@ -1,47 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-  <link rel="icon" href="https://fav.farm/🔥" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+      const dogs = [
+        { name: "Snickers", age: 2 },
+        { name: "hugo", age: 8 },
+      ];
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+      function makeGreen() {
+        const p = document.querySelector("p");
+        p.style.color = "#BADA55";
+        p.style.fontSize = "50px";
+      }
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+      // Regular
+      console.log("hello");
+      // Interpolated
+      // console.log('Hello I am a $s string!', '');
 
-    // Regular
+      // Styled
+      // console.log('%c I am some great text','font-size:50px; background:red; text-shadow: 10px 10px 0 blue');
+      // warning!
+      console.warn("OH NOOO");
 
-    // Interpolated
+      // Error :|
+      console.error("SHIT!");
+      // Info
+      console.info("crocodiles eat 3-4 people per year");
+      //--supposed to show info icon before the string
 
-    // Styled
+      // Testing
+      //--will only fire in the console if something is wrong
+      console.assert(1 === 1, "that is wrong");
+      console.assert(1 === 2, "that is hella wrong");
 
-    // warning!
+      // clearing - clears the console
+      console.clear();
 
-    // Error :|
+      // Viewing DOM Elements
+      const p = document.querySelector("p");
+      console.log(p); //shows element itself
+      console.dir(p); //shows properties and methods of the element
 
-    // Info
+      // Grouping together
+      console.clear();
+      dogs.forEach((dog) => {
+        console.groupCollapsed(`${dog.name}`); //console.group is expanded by default
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.log(`${dog.name} is ${dog.age * 7} years old`);
+        console.groupEnd(`${dog.name}`);
+      });
+      // counting - counts how many times something was used
 
-    // Testing
+      console.count("Westly");
+      console.count("Westly");
+      console.count("Westly");
+      console.count("Steve");
+      console.count("Steve");
+      console.count("Steve");
+      console.count("Joe");
+      console.count("Joe");
+      console.count("Joe");
 
-    // clearing
+      // timing - to see how long something takes
+      console.time("fetching data"); //do something that takes time
+      fetch("https://api.github.com/users/webos")
+        .then((data) => data.json())
+        .then((data) => {
+          console.timeEnd("fetching data"); //stop the timer with the same name used to start it
+          console.log(data);
+        });
 
-    // Viewing DOM Elements
-
-    // Grouping together
-
-    // counting
-
-    // timing
-
-  </script>
-</body>
+      //table
+      console.table(dogs);
+    </script>
+  </body>
 </html>
