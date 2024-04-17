@@ -18,14 +18,20 @@
       ctx.strokeStyle = "#BADA55"; //color
       ctx.lineJoin = "round"; //the line shape itself
       ctx.lineCap = "round"; //the end point shape of the line
+      ctx.lineWidth = 100;
 
       let isDrawing = false;
       let lastX = 0;
       let lastY = 0;
+      let hue = 0;
+      let direction = true;
 
       function draw(e) {
         if (!isDrawing) return; //stops the function when no mouse down
         console.log(e);
+        //setting stroke color before the path begins
+        ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+
         ctx.beginPath(); //start drawing
         ctx.moveTo(lastX, lastY); //starting point
         ctx.lineTo(e.offsetX, e.offsetY); //end point
@@ -33,6 +39,24 @@
 
         //update X and Y start point after running draw()
         [lastX, lastY] = [e.offsetX, e.offsetY];
+
+        hue++; //update color with each line
+        //reset hue if it gets to max size
+        if (hue >= 360) {
+          hue = 0;
+        }
+
+        //change direction based on line thickness
+        if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+          direction = !direction;
+        }
+
+        //increase or decrease line thickness  depending on direction
+        if (direction) {
+          ctx.lineWidth++;
+        } else {
+          ctx.lineWidth--;
+        }
       }
 
       canvas.addEventListener("mousedown", (e) => {
