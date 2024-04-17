@@ -19,6 +19,7 @@
       ctx.lineJoin = "round"; //the line shape itself
       ctx.lineCap = "round"; //the end point shape of the line
       ctx.lineWidth = 100;
+      ctx.globalCompositeOperation = "difference"; //property applies an edit on the stroke
 
       let isDrawing = false;
       let lastX = 0;
