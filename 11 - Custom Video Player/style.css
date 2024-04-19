@@ -32,6 +32,9 @@ body {
   max-width: none;
   width: 100%;
 }
+/* .player:fullscreen .player__video {
+transform: translateY(25%);
+} */
 
 .player:-webkit-full-screen {
   max-width: none;
