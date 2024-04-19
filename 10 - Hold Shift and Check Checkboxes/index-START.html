@@ -99,12 +99,33 @@
       const checkboxes = document.querySelectorAll(
         '.inbox input[type="checkbox"]'
       );
+
       let lastChecked;
 
-      //this function logs the event for each checkbox click on the console
+      //this keyword refers to each input that was checked
       function handleCheck(e) {
-        console.log(e);
+        let inBetween = false; //flag variable
+
+        //check if shift key is down and checking the checkbox. ignore if not checked
+        if (e.shiftKey && this.checked) {
+          //loop through every checked box
+          checkboxes.forEach((checkbox) => {
+            console.log(checkbox);
+            if (checkbox === this || checkbox === lastChecked) {
+              inBetween = !inBetween; //switches inBetween to true when input is checked
+              console.log("starting to check in between");
+            }
+
+            //checks the inputs between first checked and lastChecked inputs
+            if (inBetween) {
+              checkbox.checked = true;
+            }
+          });
+        }
+
+        lastChecked = this;
       }
+
       //the click event will fire even if using keyboard. don't have to use change event
       checkboxes.forEach((checkbox) =>
         checkbox.addEventListener("click", handleCheck)
