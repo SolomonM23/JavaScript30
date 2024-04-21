@@ -8,9 +8,13 @@
   </head>
   <body>
     <script>
-      //shows on the console what key is pressed
+      const pressed = [];
+      const secretCode = "solo";
+
       window.addEventListener("keyup", (e) => {
         console.log(e.key);
+        pressed.push(e.key);
+        console.log(pressed);
       });
     </script>
   </body>
