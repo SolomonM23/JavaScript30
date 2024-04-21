@@ -1,57 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>JS Reference VS Copy</title>
-  <link rel="icon" href="https://fav.farm/🔥" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Reference VS Copy</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <script>
+      // start with strings, numbers and booleans
+      let name = "james";
+      let name2 = name;
+      console.log(name, name2);
 
-  <script>
-    // start with strings, numbers and booleans
+      name = "julie";
+      console.log(name, name2);
 
-    // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+      let age = 75;
+      let age2 = age;
+      console.log(age, age2);
 
-    // and we want to make a copy of it.
+      age = 35;
+      console.log(age, age2);
 
-    // You might think we can just do something like this:
+      // Let's say we have an array
+      const players = ["Wes", "Sarah", "Ryan", "Poppy"];
 
-    // however what happens when we update that array?
+      // and we want to make a copy of it.
+      const team = players;
+      console.log(players, team);
+      // You might think we can just do something like this:
+      team[3] = "Lux";
 
-    // now here is the problem!
+      // however what happens when we update that array?
 
-    // oh no - we have edited the original array too!
+      // now here is the problem!
 
-    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+      // oh no - we have edited the original array too!
 
-    // So, how do we fix this? We take a copy instead!
+      // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
-    // one way
+      // So, how do we fix this? We take a copy instead!
+      const team2 = players.slice(); //if you don't pass anything, it copies the whole array
 
-    // or create a new array and concat the old one in
+      // one way
 
-    // or use the new ES6 Spread
+      // or create a new array and concat the old one in
+      const team3 = [].concat(players);
 
-    // now when we update it, the original one isn't changed
+      // or use the new ES6 Spread
+      const team4 = [...players];
 
-    // The same thing goes for objects, let's say we have a person object
+      team4[4] = "Solo";
 
-    // with Objects
-    const person = {
-      name: 'Wes Bos',
-      age: 80
-    };
+      const team5 = Array.from(players);
+      team5[4] = "Jimminey Crickett";
+      // now when we update it, the original one isn't changed
 
-    // and think we make a copy:
+      // The same thing goes for objects, let's say we have a person object
 
-    // how do we take a copy instead?
+      // with Objects
+      const person = {
+        name: "Wes Bos",
+        age: 80,
+      };
 
-    // We will hopefully soon see the object ...spread
+      // and think we make a copy:
+      const captain = person;
 
-    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+      // how do we take a copy instead?
+      const cap2 = Object.assign({}, person, { number: 99 });
+      //pass empty obj, pass original obj, pass new key/value pair you want to add to new array
+      console.log(cap2);
+      // We now have the object ...spread - like array ...spread
+      const cap3 = { ...person };
+      console.log(cap3);
 
-  </script>
+      // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
 
-</body>
+      const solo = {
+        name: "Solo",
+        age: 175,
+        social: {
+          instagram: "rxptvr",
+          facebook: "solopolotoowildd",
+        },
+      };
+
+      console.log(solo);
+
+      //making a copy does not effect original
+      const hot = Object.assign({}, solo);
+
+      //Object.assign only goes 1 level deep
+      //if you make a change to an object inside the object on the copy, it will change on the original also
+
+      hot.social.facebook = "Big Stepper";
+
+      //poor man's deep clone object/array
+      const tooHot = JSON.parse(JSON.stringify(solo));
+      //stringify turns the orig obj to a string, then parse turns it back to an object
+      console.log(tooHot);
+
+      //look into performance impact before using poor mans deep clone
+    </script>
+  </body>
 </html>
